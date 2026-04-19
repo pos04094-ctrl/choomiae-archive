@@ -142,7 +142,7 @@ header::before {
 
 .overview-photo {
   grid-column: 1 / -1;
-  height: 200px;
+  height: 320px;
   background: var(--blue3);
   border: 1px solid var(--border);
   display: flex;
@@ -153,6 +153,10 @@ header::before {
   letter-spacing: 0.1em;
   position: relative;
   overflow: hidden;
+}
+
+.overview-photo img {
+  object-position: center top;
 }
 
 .ov-card {
