@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>추미애 아카이브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f5f7fa;
+  --bg2:     #ffffff;
+  --bg3:     #eef2f8;
+  --navy:    #1a2f52;
+  --blue:    #2358b0;
+  --blue2:   #3b72d0;
+  --blue3:   #dce8f8;
+  --text:    #1a2740;
+  --muted:   rgba(26,39,64,0.52);
+  --border:  rgba(35,88,176,0.15);
+  --accent:  #2358b0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; min-height:100vh; }
+
+/* HEADER */
+header {
+  background: var(--navy);
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a2f52 0%, #2358b0 100%);
+  opacity: 0.95;
+}
+
+.header-inner { position: relative; z-index: 1; }
+
+.site-eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.3rem 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.site-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+.site-title {
+  color: #ffffff;
+}
+.site-title span {
+  color: #93c5fd;
+}
+
+.site-sub {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.badge {
+  font-size: 0.71rem;
+  padding: 0.28rem 0.75rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+}
+
+/* TAB NAV */
+.tab-nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 8px rgba(35,88,176,0.07);
+}
+
+.tab-btn {
+  padding: 0.9rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--muted);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { color: var(--blue); }
+.tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
+
+/* PANELS */
+.tab-panel { display: none; padding: 2.5rem 2rem; max-width: 960px; margin: 0 auto; }
+.tab-panel.active { display: block; }
+
+/* ── 개요 ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.overview-photo {
+  grid-column: 1 / -1;
+  height: 200px;
+  background: var(--blue3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+}
+
+.ov-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 2px;
+}
+
+.ov-card h3 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.ov-card ul { padding-left: 1rem; }
+.ov-card li, .ov-card p {
+  font-size: 0.83rem;
+  color: var(--text);
+  line-height: 1.9;
+}
+
+.stats-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--blue);
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.stat-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+/* ── 타임라인 ── */
+.timeline { position: relative; }
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 4rem;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--blue), rgba(35,88,176,0.1));
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.tl-year {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-align: right;
+  padding-top: 0.15rem;
+  position: relative;
+}
+
+.tl-year::after {
+  content: '';
+  position: absolute;
+  right: -2.45rem;
+  top: 0.42rem;
+  width: 7px; height: 7px;
+  background: var(--blue);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px rgba(35,88,176,0.25);
+}
+
+.tl-body {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.4rem;
+  border-radius: 2px;
+}
+
+.tl-body h3 {
+  font-size: 0.87rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+}
+
+.tl-body p {
+  font-size: 0.79rem;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+/* ── 판사 시절 ── */
+.judge-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.judge-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  padding: 1.4rem 1.6rem;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  border-radius: 0 2px 2px 0;
+}
+
+.judge-num {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--blue3);
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.judge-card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.judge-card p {
+  font-size: 0.81rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* ── 아카이브 ── */
+.arch-tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.arch-btn {
+  padding: 0.42rem 1rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+}
+
+.arch-btn:hover { border-color: var(--blue); color: var(--blue); }
+.arch-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+.arch-panel { display: none; }
+.arch-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+
+.arch-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.3rem;
+  border-radius: 2px;
+  transition: border-color 0.2s;
+}
+
+.arch-item:hover { border-color: var(--blue2); }
+
+.arch-item h4 {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.arch-item p {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ── 어록 ── */
+.quotes-list { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.quote-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue2);
+  padding: 1.2rem 1.6rem;
+  border-radius: 0 2px 2px 0;
+}
+
+.quote-text {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.93rem;
+  line-height: 1.9;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.quote-source {
+  font-size: 0.71rem;
+  color: var(--blue);
+  letter-spacing: 0.08em;
+}
+
+/* ── 기사·영상 ── */
+.media-list { display: flex; flex-direction: column; gap: 0.7rem; }
+
+.media-item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1rem 1.3rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  border-radius: 2px;
+  align-items: center;
+}
+
+.media-item:hover {
+  border-color: var(--blue2);
+  box-shadow: 0 2px 10px rgba(35,88,176,0.08);
+}
+
+.media-source {
+  font-size: 0.69rem;
+  color: var(--blue);
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.media-title {
+  font-size: 0.83rem;
+  color: var(--navy);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.media-date {
+  font-size: 0.71rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.71rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+  background: var(--bg2);
+}
+
+@media (max-width: 640px) {
+  .tab-panel { padding: 1.8rem 1.2rem; }
+  .overview-grid, .stats-row, .arch-panel.active { grid-template-columns: 1fr; }
+  .tab-btn { padding: 0.75rem 1rem; font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="site-eyebrow">더불어민주당 경기도지사 후보</div>
+    <h1 class="site-title"><span>추미애</span> 아카이브</h1>
+    <p class="site-sub">판사 · 6선 의원 · 민주당 대표 · 법무부장관 · 경기도지사 후보</p>
+    <div class="badges">
+      <span class="badge">추다르크</span>
+      <span class="badge">세탁소집 둘째딸</span>
+      <span class="badge">삼성 로비 거부</span>
+      <span class="badge">헌정 최초 여성 6선</span>
+      <span class="badge">검찰개혁 완수</span>
+      <span class="badge">제주 4·3 특별법</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview',this)">개요</button>
+  <button class="tab-btn" onclick="showTab('timeline',this)">타임라인</button>
+  <button class="tab-btn" onclick="showTab('judge',this)">판사 시절</button>
+  <button class="tab-btn" onclick="showTab('archive',this)">주제별 아카이브</button>
+  <button class="tab-btn" onclick="showTab('quotes',this)">주요 어록</button>
+  <button class="tab-btn" onclick="showTab('media',this)">기사·영상</button>
+</nav>
+
+<!-- 개요 -->
+<div class="tab-panel active" id="tab-overview">
+  <div class="overview-grid">
+    <div class="overview-photo">
+      <!-- 사진 교체: 아래 주석 해제 후 URL 입력 -->
+      <!-- <img src="사진URL" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"> -->
+      사진 영역 (이미지 URL 교체 가능)
+    </div>
+    <div class="ov-card">
+      <h3>기본 정보</h3>
+      <ul>
+        <li>1958년 10월 23일 대구 출생</li>
+        <li>경북여고 → 한양대 법학과</li>
+        <li>연세대 경제대학원 석사</li>
+        <li>제24회 사법시험 합격</li>
+        <li>배우자: 서성환 변호사 (한양대 동기)</li>
+        <li>1남 2녀</li>
+      </ul>
+    </div>
+    <div class="ov-card">
+      <h3>주요 경력</h3>
+      <ul>
+        <li>춘천·인천·전주지법·광주고법 판사</li>
+        <li>15·16·18·19·20·22대 국회의원 (6선)</li>
+        <li>더불어민주당 대표 (2016~2018)</li>
+        <li>제67대 법무부장관 (2020~2021)</li>
+        <li>제22대 법제사법위원장 (2025~2026)</li>
+        <li>더불어민주당 경기도지사 후보 (2026)</li>
+      </ul>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">6선</div>
+        <div class="stat-label">헌정 최초 여성 지역구 6선</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">682건</div>
+        <div class="stat-label">법사위원장 재임 중 처리 법안</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">31년</div>
+        <div class="stat-label">민선 지방자치 최초 여성 광역단체장 도전</div>
+      </div>
+    </div>
+    <div class="ov-card">
+      <h3>핵심 평가</h3>
+      <p>판사 시절부터 소신을 지켜온 법조인. 대구 출신임에도 민주당에서 6선을 달성했다. 법무부장관으로 검찰개혁을 주도하고, 법사위원장으로 검찰청 폐지까지 완수했다. '추다르크'라는 별명처럼 정면 돌파의 정치 스타일이 특징이다.</p>
+    </div>
+    <div class="ov-card">
+      <h3>최초 기록</h3>
+      <ul>
+        <li>헌정 최초 여성 판사 출신 국회의원</li>
+        <li>소선거구제 도입 후 서울 최초 여성 의원</li>
+        <li>민주당 최초 대구·경북 출신 여성 당대표</li>
+        <li>민주당계 임기 완주 최초 당대표</li>
+        <li>헌정 최초 여성 지역구 6선 의원</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 타임라인 -->
+<div class="tab-panel" id="tab-timeline">
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">1958</div><div class="tl-body"><h3>대구 출생 — 세탁소집 둘째딸</h3><p>경북 달성 출신. 세탁소를 운영하는 부모 밑에서 정의와 정직을 삶의 기준으로 삼았다. 단칸방 사글세를 전전하며 서민의 삶을 몸으로 배웠다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">1982</div><div class="tl-body"><h3>사법고시 합격 · 판사 임용</h3><p>제24회 사법시험 합격. 춘천·인천·전주지법·광주고법에서 판사로 재직하며 소신 있는 법관으로 이름을 알렸다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">1986</div><div class="tl-body"><h3>불온서적 영장 전국 유일 기각</h3><p>전두환 정권의 압수수색 영장 청구에 전국 유일하게 기각 결정. "책에 불온성이 없다"는 법관 양심을 지켰다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">1995</div><div class="tl-body"><h3>김대중 총재 발탁 · 정계 입문</h3><p>판사직을 사임하고 새정치국민회의에 입당. "세탁소집 둘째 딸, 부정부패한 정치판을 세탁해!"를 내걸고 지역구에 도전했다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">1996</div><div class="tl-body"><h3>초선 당선 · 한총련 성추행 국감 폭로</h3><p>광진구 을 43.77% 득표. 헌정 최초 여성 판사 출신 국회의원. 국감장에서 경찰의 여대생 성희롱 사실을 끝까지 읽으며 공론화했다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">1997</div><div class="tl-body"><h3>잔다르크 유세단 → '추다르크' 탄생</h3><p>김대중 대선 캠프 유세단장으로 보수의 심장 대구에서 선거운동. 지역감정에 맞서 싸우는 모습에 '추다르크' 별명을 얻었다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">1998</div><div class="tl-body"><h3>2년 연속 최우수 의원 · 제주 4·3 특별법</h3><p>1998·1999년 최우수의원 1위. 제주 4·3 수형인 명부 발굴 및 특별법 제정을 이끌어 '제주 명예도민 1호'로 추대됐다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2000</div><div class="tl-body"><h3>삼성 로비 골프백 거부</h3><p>삼성이 돈이 든 골프백을 사무실에 두고 갔으나 즉시 돌려보냄. 2007년 삼성 내부 문건에 "추미애의원처럼 돈을 받지 않는 상대는 비싼 포도주를 건네라"고 기재돼 세상에 알려졌다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2016</div><div class="tl-body"><h3>더불어민주당 대표 선출</h3><p>54.03% 득표. 민주당 최초 대구·경북 출신 여성 당대표. 2017년 문재인 대선 승리, 2018년 지방선거 압승. 민주당 역사상 최초 임기 완주 당대표.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2020</div><div class="tl-body"><h3>제67대 법무부장관 취임</h3><p>취임 40일 만에 역대 최초로 검찰 수사권·기소권 분리 주장. 윤석열 검찰총장과 대립하며 초유의 검찰총장 징계를 단행했다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-body"><h3>하남갑 당선 · 헌정 최초 여성 6선</h3><p>경기 하남시 갑으로 지역구를 옮겨 당선. 비례대표 없이 지역구만으로 6선을 달성한 헌정 최초의 여성 의원이 됐다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-body"><h3>법사위원장 · 682건 처리</h3><p>7개월간 682건 처리. 사법개혁 3법, 검찰청 폐지·공소청·중수청, 내란전담재판부 설치법까지 검찰개혁 과제를 완수했다.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-body"><h3>경기도지사 후보 확정</h3><p>경선 과반 득표로 결선 없이 확정. 민선 31년 역사상 최초 여성 광역단체장 탄생을 향해 나아가고 있다.</p></div></div>
+  </div>
+</div>
+
+<!-- 판사 시절 -->
+<div class="tab-panel" id="tab-judge">
+  <div class="judge-list">
+    <div class="judge-card">
+      <div class="judge-num">01</div>
+      <div><h3>불온서적 영장 — 전국 유일 기각</h3><p>1986년 전두환 정권이 『난장이가 쏘아올린 작은 공』 등 100여 권을 불온서적으로 지정하고 전국 법원에 압수수색 영장을 청구했다. 전국 판사 모두가 영장을 발부한 상황에서 초임 추미애만이 홀로 기각했다. 당시 법원장은 "남들처럼 하는 게 상식이 아닌가"라고 질책했지만 추미애는 굽히지 않았다.</p></div>
+    </div>
+    <div class="judge-card">
+      <div class="judge-num">02</div>
+      <div><h3>경찰서장 한밤 전화 — 단호히 거절하고 사과받다</h3><p>구속영장이 기각됐다며 경찰서장이 한밤중에 직접 전화해 재발부를 압박했다. 추미애는 "영장청구권자는 검사인데 서장이 왜 직접 전화하느냐"고 응수했다. 법원장의 질책에도 굽히지 않고 검찰에 문제 제기했고, 결국 경찰서장이 찾아와 직접 사과했다.</p></div>
+    </div>
+    <div class="judge-card">
+      <div class="judge-num">03</div>
+      <div><h3>초등학교 때부터 싹튼 소신 — 교실을 박차고 나가다</h3><p>대구 남산초등학교 6학년 때 촌지를 받는 담임 선생님이 친구를 때리는 것을 보고 교실을 박차고 나갔다. "선생님 스스로가 옳다고 생각할까봐"라는 이유였다. 경북여고 입학 때 좌우명을 묻자 "후회하지 않는 삶을 살겠다"고 답했다.</p></div>
+    </div>
+    <div class="judge-card">
+      <div class="judge-num">04</div>
+      <div><h3>전국구 거부 — 지역구 도전을 선언하다</h3><p>김대중 총재를 처음 만난 자리에서 "전국구 말고 지역구 국회의원에 도전하겠다"고 선언했다. 편한 길 대신 지역구에 도전해 여성에게 도전할 수 있다는 희망을 보이고 싶어서였다. 동료들 모두 "대단하다"고 칭찬했다.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 아카이브 -->
+<div class="tab-panel" id="tab-archive">
+  <div class="arch-tabs">
+    <button class="arch-btn active" onclick="showArch('reform',this)">검찰·사법개혁</button>
+    <button class="arch-btn" onclick="showArch('welfare',this)">서민·주거</button>
+    <button class="arch-btn" onclick="showArch('rights',this)">인권·제주 4·3</button>
+    <button class="arch-btn" onclick="showArch('local',this)">지방자치</button>
+  </div>
+  <div class="arch-panel active" id="arch-reform">
+    <div class="arch-item"><h4>검찰 수사권·기소권 분리 최초 주장</h4><p>법무부장관 취임 40일 만에 역대 최초로 검찰의 수사권·기소권 분리를 주장했다.</p></div>
+    <div class="arch-item"><h4>윤석열 검찰총장 징계 청구</h4><p>판사 사찰, 검언유착 수사 방해 등의 사유로 초유의 검찰총장 징계를 단행했다.</p></div>
+    <div class="arch-item"><h4>사법개혁 3법 처리</h4><p>법왜곡죄·재판소원·대법관 증원 법안을 모두 통과시켰다.</p></div>
+    <div class="arch-item"><h4>검찰청 폐지 · 공소청·중수청 설치</h4><p>법사위원장으로서 7개월 682건 처리. 검찰개혁 핵심 과제를 완수했다.</p></div>
+    <div class="arch-item"><h4>내란전담재판부 설치법 제정</h4><p>12·3 내란의 실체를 밝히기 위한 제도적 장치를 마련했다.</p></div>
+    <div class="arch-item"><h4>2차 종합특검법 제정</h4><p>내란 진상규명을 위한 특검법을 제정했다.</p></div>
+  </div>
+  <div class="arch-panel" id="arch-welfare">
+    <div class="arch-item"><h4>청년 두배통장 모태 제안</h4><p>2011년 중소기업 재직 청년 저축 시 정부가 동일 금액 적립, 최대 5천만원 목돈 마련 아이디어 최초 고안. 현재 청년내일키움통장의 원형.</p></div>
+    <div class="arch-item"><h4>복합행정복지센터 전국 모델 창설</h4><p>2001년 광진구 자양2동에 어린이집·주민센터·문화공간 복합청사를 선도 구축. 현재 전국 모델의 원형.</p></div>
+    <div class="arch-item"><h4>주민자치센터 설치 법안 최초 발의</h4><p>2000년 11월 주민자치센터 설치 법안을 전국 최초로 발의했다.</p></div>
+    <div class="arch-item"><h4>공공주택 14만 8천호 공급 공약</h4><p>임기 내 공공주택 14만8천호 공급, 청년·신혼부부 주거 지원을 경기도지사 핵심 공약으로 제시.</p></div>
+  </div>
+  <div class="arch-panel" id="arch-rights">
+    <div class="arch-item"><h4>제주 4·3 수형인 명부 발굴 (1998)</h4><p>4·3 특위 부위원장으로서 수형인 명부를 직접 발굴. 국가폭력 피해자 명예 회복의 첫 발.</p></div>
+    <div class="arch-item"><h4>제주 4·3 특별법 제정 (1999)</h4><p>대정부 질문과 입법 활동으로 특별법 제정을 이끌었다. '제주 명예도민 1호' 추대.</p></div>
+    <div class="arch-item"><h4>4·3 희생자 유족 배상 추진</h4><p>법무부장관 재직 시 배상을 추진. 2021년 4·3 유족회·평화재단 감사패 수령.</p></div>
+    <div class="arch-item"><h4>한총련 성추행 국감 공개 폭로 (1996)</h4><p>경찰의 여대생 성희롱 사실을 국감장에서 끝까지 읽어 공론화. 여당 집단퇴장에도 굽히지 않았다.</p></div>
+  </div>
+  <div class="arch-panel" id="arch-local">
+    <div class="arch-item"><h4>지방의원 유급화 추진</h4><p>새천년민주당 지방자치위원장(2000~2001)으로 지방의원 유급화를 추진했다.</p></div>
+    <div class="arch-item"><h4>GTX 정상화 공약</h4><p>첫 삽을 못 뜬 GTX-C 노선 등 멈춰있는 사업의 조속한 정상화를 핵심 공약으로 제시.</p></div>
+    <div class="arch-item"><h4>행정안전위원 6년 역임</h4><p>1996~2002년 경기도 수해 대응 실패, 핑퐁식 책임 회피, 전시성 예산 등을 질타했다.</p></div>
+    <div class="arch-item"><h4>한국예술종합학교 경기권 유치 공약</h4><p>문화 인프라 확충을 위한 한예종 경기권 유치를 공약으로 내세웠다.</p></div>
+  </div>
+</div>
+
+<!-- 어록 -->
+<div class="tab-panel" id="tab-quotes">
+  <div class="quotes-list">
+    <div class="quote-card"><p class="quote-text">"후회하지 않는 삶을 살겠다"</p><div class="quote-source">경북여고 입학 당시 좌우명</div></div>
+    <div class="quote-card"><p class="quote-text">"세탁소집 둘째 딸, 부정부패한 정치판을 세탁해!"</p><div class="quote-source">첫 국회의원 선거 캐치프레이즈</div></div>
+    <div class="quote-card"><p class="quote-text">"돈 가지고 하는 정치는 누구나 할 수 있지. 그런데 당신은 돈 없이도 정치를 할 수 있다는 걸 보여줘!"</p><div class="quote-source">정계 입문 당시 남편의 말</div></div>
+    <div class="quote-card"><p class="quote-text">"모든 개혁에는 응당 저항이 있을 수 있습니다. 그러나 영원한 개혁은 있어도 영원한 저항은 있을 수 없습니다."</p><div class="quote-source">2020년 12월 SNS</div></div>
+    <div class="quote-card"><p class="quote-text">"내 정치 인생 중 가장 큰 실수이자 과오가 탄핵에 찬성한 것"</p><div class="quote-source">노무현 대통령 탄핵 찬성에 대해</div></div>
+    <div class="quote-card"><p class="quote-text">"부자건 가난하건 출발선이 같은 사회를 만들고 싶다"</p><div class="quote-source">청년 자산형성 통장 제안 당시</div></div>
+    <div class="quote-card"><p class="quote-text">"2021년 검찰 개혁을 완수하지 못한 채 법무부장관 자리를 떠나야 했던 무거운 발걸음이 아니라 이처럼 뜻깊은 결과를 여러분께 보고드릴 수 있게 돼 영광"</p><div class="quote-source">2026년 법사위원장 사임 당시</div></div>
+  </div>
+</div>
+
+<!-- 기사·영상 -->
+<div class="tab-panel" id="tab-media">
+  <div class="media-list">
+    <a class="media-item" href="https://www.khan.co.kr/article/202604071834001" target="_blank">
+      <div class="media-source">경향신문</div>
+      <div><div class="media-title">검찰개혁 선봉서 이끈 6선의 '추다르크'…민주당 경기지사 후보 추미애는 누구</div><div class="media-date">2026.04.07</div></div>
+    </a>
+    <a class="media-item" href="http://www.joongboo.com/news/articleView.html?idxno=363722187" target="_blank">
+      <div class="media-source">중부일보</div>
+      <div><div class="media-title">경기지사 후보 추미애 누구인가… 입법·사법·행정 두루 거친 '경험형 리더'</div><div class="media-date">2026.04.08</div></div>
+    </a>
+    <a class="media-item" href="https://www.lawtimes.co.kr/news/articleView.html?idxno=218168" target="_blank">
+      <div class="media-source">법률신문</div>
+      <div><div class="media-title">추미애, 법사위원장 사임 "검찰 개혁 마지막 소임 완수"</div><div class="media-date">2026.03</div></div>
+    </a>
+    <a class="media-item" href="https://www.joongboo.com/news/articleView.html?idxno=363721327" target="_blank">
+      <div class="media-source">중부일보</div>
+      <div><div class="media-title">[인터뷰] 입법·사법·행정 두루 경험한 추미애 "도민과의 약속 이행하는 행정 가장 중요"</div><div class="media-date">2026.03</div></div>
+    </a>
+    <a class="media-item" href="https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0002239464" target="_blank">
+      <div class="media-source">오마이뉴스</div>
+      <div><div class="media-title">초선 추미애가 국감장서 '쌍욕' 읊은 이유</div><div class="media-date"></div></div>
+    </a>
+    <a class="media-item" href="https://imnews.imbc.com/replay/1996/nwdesk/article/2010885_30711.html" target="_blank">
+      <div class="media-source">MBC</div>
+      <div><div class="media-title">한총련 시위 여학생 성추행 관련 국감 질의 영상</div><div class="media-date">1996</div></div>
+    </a>
+    <a class="media-item" href="https://www.kyeongin.com/article/1761458" target="_blank">
+      <div class="media-source">경인일보</div>
+      <div><div class="media-title">민주당 경기도지사 후보 추미애 확정…"6월 3일 압도적 승리로 보답"</div><div class="media-date">2026.04.08</div></div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  추미애 아카이브 · 개인이 제작한 비공식 정보 아카이브입니다 · 모든 내용은 공개된 자료를 바탕으로 작성되었습니다
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function showArch(id, btn) {
+  document.querySelectorAll('.arch-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.arch-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('arch-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
